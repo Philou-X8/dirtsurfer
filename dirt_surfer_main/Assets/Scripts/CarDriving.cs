@@ -14,12 +14,13 @@ public class CarDriving : MonoBehaviour
 
     private float horizontalInput;
     private float verticalInput;
-    private bool handBrakeInput;
+    private float handBrakeInput;
 
     public float maxMotorForce;
     public float breakForce;
     public float maxSteerAngle;
     public float steeringAssist = 30;
+    private float currentSteerAngle = 0f;
 
     public float engineRPM = 1000;
     private const float idleRPM = 0;
@@ -48,7 +49,7 @@ public class CarDriving : MonoBehaviour
     public void OnHandbrake(InputValue input)
     {
         print("handBrake: " + input.Get<float>());
-        handBrakeInput = input.Get<float>() == 1;
+        handBrakeInput = input.Get<float>();
     }
 
     void Start()
@@ -60,37 +61,23 @@ public class CarDriving : MonoBehaviour
 
         horizontalInput = 0f;
         verticalInput = 0f;
-        handBrakeInput = false;
+        handBrakeInput = 0f;
     }
 
-    private void Update()
-    {
-        
-        GetInput();
-    }
-
+    
     void FixedUpdate()
     {
         carSpeed = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
         //carSpeed = carRigidbody.velocity.magnitude;
-        wheelSpeed = Mathf.PI * wColliderBR.radius * wColliderBR.rpm / 60;
+        float agvWheelRpm = (wColliderBR.rpm + wColliderBL.rpm + wColliderFR.rpm + wColliderFL.rpm) / 4;
+        wheelSpeed = Mathf.PI * wColliderBR.radius * agvWheelRpm / 60;
         deltaSpeed = wheelSpeed - carSpeed;
 
         ApplyTorque();
         HandleSteering();
-
-        wColliderBL.brakeTorque = handBrakeInput ? breakForce : 0f;
-        wColliderBR.brakeTorque = handBrakeInput ? breakForce : 0f;
-    }
-
-    private void GetInput()
-    {
+        ApplyBrakeHand();
         
-        //horizontalInput = Input.GetAxis("Horizontal");
-        //verticalInput = Input.GetAxis("Vertical");
-        //handBrakeInput = ( Input.GetKey(KeyCode.Space) || Input.GetButton("Fire1") );
-        //Input.GetAxis("10th Axis");
     }
 
     private void ApplyTorque()
@@ -105,19 +92,30 @@ public class CarDriving : MonoBehaviour
             engineRPM -= 100;
         }
         engineRPM = Mathf.Clamp(engineRPM, idleRPM, maxRPM);
-        wColliderFL.motorTorque = verticalInput * maxMotorForce * engineRPM / maxRPM;
-        wColliderFR.motorTorque = verticalInput * maxMotorForce * engineRPM / maxRPM;
-        wColliderBL.motorTorque = verticalInput * maxMotorForce * engineRPM / maxRPM;
-        wColliderBR.motorTorque = verticalInput * maxMotorForce * engineRPM / maxRPM;
+        float outputTorque = verticalInput * maxMotorForce * engineRPM / maxRPM;
+        wColliderFL.motorTorque = outputTorque;
+        wColliderFR.motorTorque = outputTorque;
+        wColliderBL.motorTorque = outputTorque;
+        wColliderBR.motorTorque = outputTorque;
 
     }
 
     private void HandleSteering()
     {
+        //smooth the wheel turning speed
+        currentSteerAngle = Mathf.Clamp(currentSteerAngle + (horizontalInput-currentSteerAngle)/5, -1f, 1f);
 
-        float targetSteer = maxSteerAngle * horizontalInput * (steeringAssist/(carSpeed+steeringAssist));
+        //limit the turn angle based on current speed
+        float targetSteer = maxSteerAngle * currentSteerAngle * (steeringAssist/(Mathf.Abs(carSpeed)+steeringAssist));
         wColliderFL.steerAngle = targetSteer;
         wColliderFR.steerAngle = targetSteer;
     }
-    
+
+    private void ApplyBrakeHand()
+    {
+        wColliderBL.brakeTorque = handBrakeInput * breakForce;
+        wColliderBR.brakeTorque = handBrakeInput * breakForce;
+    }
+
+
 }
