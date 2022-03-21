@@ -12,17 +12,18 @@ public class PlayerCar : MonoBehaviour
 
     public Vector3 CoM;
 
-    private float forwardInput;
-    private float reverseInput;
-    private float throttleInput;
-    public float carSpeed;
+    private float forwardInput; // how much you want to accelerate (0 to 1)
+    private float reverseInput; // how much you want to decelerate (0 to -1)
+    private float throttleInput; // computed result of forward and reverse
+    private float steerInput; // steering scale from -1 (left) to 1 (right)
+    
+    public float carSpeed; // speed parallel to the car body (m/s)
+    public float wheelRPM; // average wheel rpm
 
-    public float wheelRPM;
-
-    public float steerAngle;
-    public float wheelTorque;
-    public float pedalBrakeForce;
-    public float handBrakeForce;
+    private float steerAngle;
+    private float wheelTorque;
+    private float pedalBrakeForce;
+    private float handBrakeForce;
 
     public WheelCollider wColliderFL;
     public WheelCollider wColliderFR;
@@ -35,27 +36,26 @@ public class PlayerCar : MonoBehaviour
         //Set the car's center of mass (CoM)
         carRigidbody.centerOfMass = CoM;
 
-        wheelTorque = carEngine.GetTorque(wheelRPM);
     }
 
     void FixedUpdate()
     {
+        // average the rpm of all 4 wheel
         wheelRPM = (wColliderBR.rpm + wColliderBL.rpm + wColliderFR.rpm + wColliderFL.rpm) / 4;
 
         carSpeed = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
         ConvertThrottle();
-
-        steerAngle = carSteering.GetSteer(carSpeed);
-        wheelTorque = carEngine.GetTorque(wheelRPM);
+        steerAngle = carSteering.GetSteer(steerInput, carSpeed);
+        wheelTorque = carEngine.GetTorque(throttleInput, wheelRPM);
         ApplySteering();
         ApplyTorque();
         ApplyBrake();
     }
-
+    // --------------------------- user input ---------------------
     public void OnSteering(InputValue input)
     {
-        carSteering.input = input.Get<float>();
+        steerInput = input.Get<float>();
     }
     public void OnForward(InputValue input)
     {
@@ -68,9 +68,7 @@ public class PlayerCar : MonoBehaviour
     public void OnHandbrake(InputValue input)
     {
         handBrakeForce = input.Get<float>();
-        handBrakeForce *= 1000;
     }
-
     public void OnGearUp(InputValue input)
     {
         if(carEngine.gear<10) carEngine.gear++;
@@ -79,7 +77,7 @@ public class PlayerCar : MonoBehaviour
     {
         if (carEngine.gear > 1) carEngine.gear--;
     }
-
+    // --------------------------- user input end -----------------
     private void ConvertThrottle()
     {
         throttleInput = forwardInput+reverseInput;
@@ -87,15 +85,14 @@ public class PlayerCar : MonoBehaviour
         carSpeed = transform.InverseTransformDirection(carRigidbody.velocity).z;
         if (carSpeed > 5)
         {
-            carEngine.input = Mathf.Clamp01(throttleInput);
+            throttleInput = Mathf.Clamp01(throttleInput);
             pedalBrakeForce = -reverseInput;
         } else if (carSpeed < -5)
         {
-            carEngine.input = Mathf.Clamp(throttleInput, -1, 0);
+            throttleInput = Mathf.Clamp(throttleInput, -1, 0);
             pedalBrakeForce = forwardInput;
         } else
         {
-            carEngine.input = throttleInput;
             pedalBrakeForce = 0f;
         }
     }
@@ -110,8 +107,8 @@ public class PlayerCar : MonoBehaviour
     {
         wColliderFL.brakeTorque = pedalBrakeForce * 500;
         wColliderFR.brakeTorque = pedalBrakeForce * 500;
-        wColliderBL.brakeTorque = Mathf.Max(pedalBrakeForce*500, handBrakeForce);
-        wColliderBR.brakeTorque = Mathf.Max(pedalBrakeForce*500, handBrakeForce);
+        wColliderBL.brakeTorque = Mathf.Max(pedalBrakeForce*500, handBrakeForce*1000);
+        wColliderBR.brakeTorque = Mathf.Max(pedalBrakeForce*500, handBrakeForce*1000);
     }
     private void ApplySteering()
     {

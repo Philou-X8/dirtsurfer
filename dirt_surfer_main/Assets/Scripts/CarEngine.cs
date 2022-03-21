@@ -4,31 +4,32 @@ using UnityEngine;
 
 public class CarEngine : MonoBehaviour
 {
+    public float maxForce;
+    public float maxRPM;
+    public const float idleRPM = 0;
+
     public float input;
     public float RPM;
-    private const float idleRPM = 0;
-    
-    private const float maxForce = 500;
-    public float outputForce;
-
-    private const float maxRPM = 10000;
     public int gear;
-    public float wheelRPM;
+
+    private float wheelRPM;
     public float efficiency;
+    private float outputForce;
 
     void Start()
     {
         gear = 1;
         input = 0f;
         RPM = 0f;
-        //UpdateRPM();
+        maxRPM = Mathf.Clamp(maxRPM, 1000, 10000);
+        maxForce = Mathf.Clamp(maxForce, 10, 10000);
     }
 
-    void FixedUpdate()
+    public float GetTorque(float masterInput, float avgWheelRPM)
     {
-        //UpdateRPM();
+        input = masterInput;
+        return GetTorque(avgWheelRPM);
     }
-
     public float GetTorque(float avgWheelRPM)
     {
         wheelRPM = Mathf.Clamp(avgWheelRPM, 0f, 2000f);
@@ -63,34 +64,5 @@ public class CarEngine : MonoBehaviour
     {
         outputForce = input * efficiency * maxForce;
     }
-    /*
-    private void ConvertRPM()
-    {
-        gear = Mathf.Clamp( Mathf.RoundToInt(wheelRPM / 200) , 1, 10 );
-        RPM = Mathf.Clamp(50 * wheelRPM / gear, idleRPM, 100000f);
-        //RPM = 50 * wheelRPM / gear;
-    }
     
-    private void EngineEfficiency()
-    {
-        float var1 = gear * RPM / 10000f;
-        float var2 = 1.2f * (var1 - gear) / Mathf.Sqrt(gear);
-        efficiency = Mathf.Pow(Mathf.Sin(var2) / var2, 5) - Mathf.Pow(var1 / 10f, 2);
-        efficiency = Mathf.Clamp01(efficiency);
-    }
-    
-    private void UpdateRPM()
-    {
-        if (input != 0)
-        {
-            RPM += 200 * Mathf.Abs(input);
-        }
-        else
-        {
-            RPM -= 300;
-        }
-        RPM = Mathf.Clamp(RPM, idleRPM, maxRPM);
-        outputForce = input * efficiency * maxForce;
-    }
-    */
 }

@@ -23,6 +23,11 @@ public class CarSteering : MonoBehaviour
     {
         //UpdateSteer();
     }
+    public float GetSteer(float masterInput, float carSpeed)
+    {
+        input = masterInput;
+        return GetSteer(carSpeed);
+    }
     public float GetSteer(float carSpeed)
     {
         forwardSpeed = carSpeed;
