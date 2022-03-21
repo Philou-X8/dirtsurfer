@@ -9,17 +9,15 @@ public class CameraMouv : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     public Rigidbody targetRigidbody;
-    private Camera cameraObj;
+    public Camera cameraObj;
 
     private List<Quaternion> pastRotations = new List<Quaternion>();
 
     void Start() 
     {
-        cameraObj = GetComponent<Camera>();
         
         for(int i = 0; i < 20; i++)
         {
-            
             pastRotations.Add(getNewCamRotation(transform));
         }
         

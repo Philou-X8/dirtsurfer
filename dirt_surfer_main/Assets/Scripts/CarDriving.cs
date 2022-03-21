@@ -16,13 +16,15 @@ public class CarDriving : MonoBehaviour
     private float verticalInput;
     private float handBrakeInput;
 
+    
+
     public float maxMotorForce;
     public float breakForce;
     public float maxSteerAngle;
     public float steeringAssist = 30;
     private float currentSteerAngle = 0f;
 
-    public float engineRPM = 1000;
+    //public float engineRPM = 1000;
     private const float idleRPM = 0;
     private const float maxRPM = 10000;
 
@@ -38,22 +40,47 @@ public class CarDriving : MonoBehaviour
     
     public void OnThrottle(InputValue input)
     {
-        print("gas: " + input.Get<float>());
         verticalInput = input.Get<float>();
+        engine.input = input.Get<float>();
+
+        if (verticalInput == 0) 
+        {
+            ApplyPedalBrake(0f);
+            print("case 1 / vInput: " + verticalInput);
+        }
+        //else if( (Mathf.Abs(carSpeed) > 10) == (verticalInput < 0) )
+        else if ( ((verticalInput>0) == (carSpeed<-10)) && (Mathf.Abs(carSpeed) > 10))
+        {
+            ApplyPedalBrake(Mathf.Abs(verticalInput));
+            ApplyTorque(0f);
+            print("case 2 / vInput: " + verticalInput);
+
+        }
+        else if (true)
+        {
+            ApplyPedalBrake(0f);
+            ApplyTorque(verticalInput);
+            print("case 3 / vInput: " + verticalInput);
+
+        }
+
     }
     public void OnSteering(InputValue input)
     {
-        print("steer: " + input.Get<float>());
         horizontalInput = input.Get<float>();
+        //print("steer: " + horizontalInput);
     }
     public void OnHandbrake(InputValue input)
     {
-        print("handBrake: " + input.Get<float>());
         handBrakeInput = input.Get<float>();
+        //print("handBrake: " + handBrakeInput);
+
+        ApplyHandBrake();
     }
 
     void Start()
     {
+        engine.RPM++;
         carRigidbody = GetComponent<Rigidbody>();
         carRigidbody.centerOfMass = CoM;
 
@@ -64,7 +91,6 @@ public class CarDriving : MonoBehaviour
         handBrakeInput = 0f;
     }
 
-    
     void FixedUpdate()
     {
         carSpeed = transform.InverseTransformDirection(carRigidbody.velocity).z;
@@ -74,30 +100,43 @@ public class CarDriving : MonoBehaviour
         wheelSpeed = Mathf.PI * wColliderBR.radius * agvWheelRpm / 60;
         deltaSpeed = wheelSpeed - carSpeed;
 
-        ApplyTorque();
+        //ApplyTorque();
+        UpdateEngineRPM();
         HandleSteering();
-        ApplyBrakeHand();
+        //ApplyHandBrake();
         
     }
 
-    private void ApplyTorque()
+    private void UpdateEngineRPM()
     {
         
         if (verticalInput != 0)
         {
-            engineRPM += 100 * Mathf.Abs(verticalInput);
+            engine.RPM += 100 * Mathf.Abs(verticalInput); 
         }
         else
         {
-            engineRPM -= 100;
+            engine.RPM -= 200;
         }
-        engineRPM = Mathf.Clamp(engineRPM, idleRPM, maxRPM);
-        float outputTorque = verticalInput * maxMotorForce * engineRPM / maxRPM;
+        engine.RPM = Mathf.Clamp(engine.RPM, idleRPM, maxRPM);
+    }
+    private void ApplyTorque(float torqueInput)
+    {
+
+        // (0.5f + torqueInput/2)
+        float outputTorque = torqueInput * maxMotorForce; // * engineRPM / maxRPM;
         wColliderFL.motorTorque = outputTorque;
         wColliderFR.motorTorque = outputTorque;
         wColliderBL.motorTorque = outputTorque;
         wColliderBR.motorTorque = outputTorque;
 
+    }
+    private void ApplyPedalBrake(float brakeInput)
+    {
+        wColliderFL.brakeTorque = brakeInput * breakForce;
+        wColliderFR.brakeTorque = brakeInput * breakForce;
+        wColliderBL.brakeTorque = brakeInput * breakForce;
+        wColliderBR.brakeTorque = brakeInput * breakForce;
     }
 
     private void HandleSteering()
@@ -111,11 +150,22 @@ public class CarDriving : MonoBehaviour
         wColliderFR.steerAngle = targetSteer;
     }
 
-    private void ApplyBrakeHand()
+    private void ApplyHandBrake()
     {
         wColliderBL.brakeTorque = handBrakeInput * breakForce;
         wColliderBR.brakeTorque = handBrakeInput * breakForce;
     }
 
+    [System.Serializable]
+    public class Engine
+    {
+        public float input;
+        public float RPM;
+        public const float idleRPM = 0;
+        public const float maxRPM = 10000;
 
+        public const float maxForce = 500;
+        public float outputForce;
+    }
+    public Engine engine;
 }

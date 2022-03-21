@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 23
+  controlID: 29
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 29
+  controlID: 19
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 30
+  controlID: 20
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -292,12 +292,12 @@ MonoBehaviour:
   m_MinSize: {x: 600, y: 300}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: New Controls (Input Actions)
+    m_Text: Custom Inputs (Input Actions)
     m_Image: {fileID: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 340
+    x: 2260
     y: 73
     width: 1124
     height: 653
@@ -329,9 +329,9 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 739dd79a
-    m_LastClickedID: -1697145485
-    m_ExpandedIDs: 588f5f83be3c3389739dd79a2188daae49c911e666d7a6e72adab4137f161e1a88990b31e460324d32f19b6a42d8427d
+    m_SelectedIDs: f784be5f
+    m_LastClickedID: 1606321399
+    m_ExpandedIDs: a6271081588f5f834f718e83be3c3389f78e8f8a18d28298739dd79a2188daae49c911e666d7a6e72adab4137f161e1ae36b142488990b31e460324dadcef551a6fb08558cb5a46432f19b6a42d8427d
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -375,19 +375,30 @@ MonoBehaviour:
         scroll: {x: 0, y: 0}
       - itemId: 1275948795
         selectedIndex: -1
+        scroll: {x: 0, y: 63.5}
+      - itemId: 998472819
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -206068285
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1184013745
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1184024587
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: 656259478
+        selectedIndex: 0
         scroll: {x: 0, y: 0}
     m_ManualPathEditMode: 0
   m_ActionAssetManager:
     m_AssetObjectForEditing: {fileID: 0}
     m_ImportedAssetObject: {fileID: -944628639613478452, guid: 107dfa0d4cb437d4ead9f1898163906c, type: 3}
     m_AssetGUID: 107dfa0d4cb437d4ead9f1898163906c
-    m_ImportedAssetJson: "{\n    \"name\": \"New Controls\",\n    \"maps\": [\n       
+    m_ImportedAssetJson: "{\n    \"name\": \"Keybinds\",\n    \"maps\": [\n       
       {\n            \"name\": \"Driving\",\n            \"id\": \"bc84acf8-1db1-4c30-8c6c-9fbf7be118c6\",\n           
-      \"actions\": [\n                {\n                    \"name\": \"Throttle\",\n                   
-      \"type\": \"Value\",\n                    \"id\": \"a91e1fbf-77d1-4b28-88bd-2b7dc75dc731\",\n                   
-      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
-      \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
-      },\n                {\n                    \"name\": \"Steering\",\n                   
+      \"actions\": [\n                {\n                    \"name\": \"Steering\",\n                   
       \"type\": \"Value\",\n                    \"id\": \"8e4fe7b7-cfc1-4646-aecb-2787a7f53055\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
@@ -395,38 +406,23 @@ MonoBehaviour:
       \"type\": \"Value\",\n                    \"id\": \"b4a44c24-62fd-4516-aff0-f39a054396f1\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
+      },\n                {\n                    \"name\": \"Forward\",\n                   
+      \"type\": \"Value\",\n                    \"id\": \"7242c0e8-7e32-4700-a3e0-86e2d4903186\",\n                   
+      \"expectedControlType\": \"Analog\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
+      },\n                {\n                    \"name\": \"Reverse\",\n                   
+      \"type\": \"Value\",\n                    \"id\": \"17afb203-19d7-49dc-80fc-5a8ea3d9a65a\",\n                   
+      \"expectedControlType\": \"\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
+      },\n                {\n                    \"name\": \"GearUp\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"34794c99-1f44-44ea-a8d9-65e7d3ade616\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"GearDown\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"6a31c999-32c5-4d0a-9856-1606dc7fafb9\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       }\n            ],\n            \"bindings\": [\n                {\n                   
-      \"name\": \"1D Axis\",\n                    \"id\": \"5f4b96a6-e2aa-4adb-95c2-351ac139fa8c\",\n                   
-      \"path\": \"1DAxis\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Throttle\",\n                    \"isComposite\": true,\n                   
-      \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"negative\",\n                    \"id\": \"61117ab3-a526-417e-a933-317023a3d9ea\",\n                   
-      \"path\": \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"Keyboard controls\",\n                   
-      \"action\": \"Throttle\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                },\n                {\n                   
-      \"name\": \"positive\",\n                    \"id\": \"882dc5b2-dc6e-4e71-8194-25c21f37d424\",\n                   
-      \"path\": \"<Keyboard>/w\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"Keyboard controls\",\n                   
-      \"action\": \"Throttle\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                },\n                {\n                   
-      \"name\": \"1D Axis\",\n                    \"id\": \"62b5fdaf-f10a-4617-a69e-87fd6545833e\",\n                   
-      \"path\": \"1DAxis\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Throttle\",\n                    \"isComposite\": true,\n                   
-      \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"negative\",\n                    \"id\": \"9e1144ee-ac8a-44b0-b56a-e76cf84401ab\",\n                   
-      \"path\": \"<Gamepad>/leftTrigger\",\n                    \"interactions\":
-      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
-      \"Controller\",\n                    \"action\": \"Throttle\",\n                   
-      \"isComposite\": false,\n                    \"isPartOfComposite\": true\n               
-      },\n                {\n                    \"name\": \"positive\",\n                   
-      \"id\": \"334b3cdb-d622-4809-b5a6-43c46f4b6a26\",\n                    \"path\":
-      \"<Gamepad>/rightTrigger\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"Controller\",\n                   
-      \"action\": \"Throttle\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                },\n                {\n                   
       \"name\": \"1D Axis\",\n                    \"id\": \"de53bef1-bfcd-4287-80c3-7d2a8e3332dc\",\n                   
       \"path\": \"1DAxis\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
@@ -468,19 +464,73 @@ MonoBehaviour:
       \"\",\n                    \"processors\": \"\",\n                    \"groups\":
       \"Controller\",\n                    \"action\": \"Handbrake\",\n                   
       \"isComposite\": false,\n                    \"isPartOfComposite\": false\n               
-      }\n            ]\n        }\n    ],\n    \"controlSchemes\": [\n        {\n           
-      \"name\": \"Keyboard controls\",\n            \"bindingGroup\": \"Keyboard
-      controls\",\n            \"devices\": [\n                {\n                   
-      \"devicePath\": \"<Keyboard>\",\n                    \"isOptional\": true,\n                   
-      \"isOR\": false\n                }\n            ]\n        },\n        {\n           
-      \"name\": \"Controller\",\n            \"bindingGroup\": \"Controller\",\n           
-      \"devices\": [\n                {\n                    \"devicePath\": \"<XInputController>\",\n                   
+      },\n                {\n                    \"name\": \"\",\n                   
+      \"id\": \"4a0b9858-b4d1-4f10-a2e3-9e35219bb53e\",\n                    \"path\":
+      \"<Keyboard>/w\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"Keyboard controls\",\n                   
+      \"action\": \"Forward\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"1D Axis\",\n                    \"id\": \"5a01a01d-d375-42fd-91fd-551d1ae5bd21\",\n                   
+      \"path\": \"1DAxis\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Forward\",\n                    \"isComposite\": true,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"positive\",\n                    \"id\": \"e8fb636f-c1a5-45e1-8dab-6cfaf5274160\",\n                   
+      \"path\": \"<Gamepad>/rightTrigger\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"Controller\",\n                    \"action\": \"Forward\",\n                   
+      \"isComposite\": false,\n                    \"isPartOfComposite\": true\n               
+      },\n                {\n                    \"name\": \"\",\n                   
+      \"id\": \"81d4b4ad-dabb-49c2-99ac-27a17672a6a5\",\n                    \"path\":
+      \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"Keyboard controls\",\n                   
+      \"action\": \"Reverse\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"1D Axis\",\n                    \"id\": \"cc968e17-d40b-447a-97be-9d2dc495ff26\",\n                   
+      \"path\": \"1DAxis(whichSideWins=1)\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"Reverse\",\n                    \"isComposite\":
+      true,\n                    \"isPartOfComposite\": false\n                },\n               
+      {\n                    \"name\": \"positive\",\n                    \"id\":
+      \"8ccc3100-a789-42d8-9ae5-d43d16f86452\",\n                    \"path\": \"<Gamepad>/leftTrigger\",\n                   
+      \"interactions\": \"\",\n                    \"processors\": \"\",\n                   
+      \"groups\": \"Controller\",\n                    \"action\": \"Reverse\",\n                   
+      \"isComposite\": false,\n                    \"isPartOfComposite\": true\n               
+      },\n                {\n                    \"name\": \"\",\n                   
+      \"id\": \"a69c22d2-f1cf-4bd0-8520-fde3e5a752e4\",\n                    \"path\":
+      \"<Gamepad>/buttonWest\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"Controller\",\n                   
+      \"action\": \"GearUp\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"ccd4c4cc-2a76-4e5e-8d69-96afc003a272\",\n                   
+      \"path\": \"<Keyboard>/e\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"Keyboard controls\",\n                   
+      \"action\": \"GearUp\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"8f015917-9550-42b9-bf56-668055f80740\",\n                   
+      \"path\": \"<Gamepad>/buttonEast\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"Controller\",\n                    \"action\": \"GearDown\",\n                   
+      \"isComposite\": false,\n                    \"isPartOfComposite\": false\n               
+      },\n                {\n                    \"name\": \"\",\n                   
+      \"id\": \"11fb53ac-9b95-4969-9e13-5edfe2ed88e0\",\n                    \"path\":
+      \"<Keyboard>/q\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"Keyboard controls\",\n                   
+      \"action\": \"GearDown\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                }\n            ]\n        }\n   
+      ],\n    \"controlSchemes\": [\n        {\n            \"name\": \"Keyboard
+      controls\",\n            \"bindingGroup\": \"Keyboard controls\",\n           
+      \"devices\": [\n                {\n                    \"devicePath\": \"<Keyboard>\",\n                   
+      \"isOptional\": true,\n                    \"isOR\": false\n               
+      }\n            ]\n        },\n        {\n            \"name\": \"Controller\",\n           
+      \"bindingGroup\": \"Controller\",\n            \"devices\": [\n               
+      {\n                    \"devicePath\": \"<XInputController>\",\n                   
       \"isOptional\": true,\n                    \"isOR\": false\n               
       }\n            ]\n        }\n    ]\n}"
     m_IsDirty: 0
   m_Toolbar:
     m_IsDirty: 0
-    m_SelectedControlSchemeIndex: 1
+    m_SelectedControlSchemeIndex: -1
     m_SelectedDeviceRequirementIndex: -1
     m_ControlSchemes:
     - m_Name: Keyboard controls
@@ -495,11 +545,11 @@ MonoBehaviour:
         m_Flags: 1
     m_SearchText: 
   m_DirtyTitle:
-    m_Text: (*) New Controls (Input Actions)
+    m_Text: (*) Custom Inputs (Input Actions)
     m_Image: {fileID: 0}
     m_Tooltip: 
   m_Title:
-    m_Text: New Controls (Input Actions)
+    m_Text: Custom Inputs (Input Actions)
     m_Image: {fileID: 0}
     m_Tooltip: 
 --- !u!114 &13
@@ -550,15 +600,15 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/Scripts
-  m_LastFoldersGridSize: -1
+  m_LastFoldersGridSize: 64
   m_LastProjectPath: F:\Programming\Unity\UnityPrograms\DirtSurferV1\dirtsurfer\dirt_surfer_main
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 425c0000
-    m_LastClickedID: 23618
-    m_ExpandedIDs: 00000000185c0000445c0000685c00006a5c000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 8}
+    m_SelectedIDs: dc5d0000
+    m_LastClickedID: 24028
+    m_ExpandedIDs: 00000000ca5d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -586,7 +636,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000185c0000
+    m_ExpandedIDs: 00000000ca5d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -673,7 +723,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 160
+    m_CachedPref: 226
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
@@ -714,9 +764,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 12140000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: d2f5ffff36fbffffc85b0000
+      m_ExpandedIDs: 34fbffff905b0000ea5b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -965,9 +1015,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -12.534088, y: 6.3687115, z: 0.13232422}
+    m_Target: {x: -14.068278, y: 12.069799, z: 19.540045}
     speed: 2
-    m_Value: {x: -12.534088, y: 6.3687115, z: 0.13232422}
+    m_Value: {x: -14.068278, y: 12.069799, z: 19.540045}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1009,18 +1059,18 @@ MonoBehaviour:
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
-      m_Size: {x: 0, y: 0}
+      m_Size: {x: 1, y: 1}
     m_ShowGrid: 1
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.049165946, y: -0.88153934, z: 0.094242126, w: 0.4599502}
+    m_Target: {x: -0.035983767, y: 0.81107455, z: -0.05021057, w: -0.5817352}
     speed: 2
-    m_Value: {x: 0.049166817, y: -0.88155496, z: 0.094243795, w: 0.45995834}
+    m_Value: {x: -0.03598244, y: 0.8110447, z: -0.05020872, w: -0.5817138}
   m_Size:
-    m_Target: 38.405094
+    m_Target: 2.2331407
     speed: 2
-    m_Value: 38.405094
+    m_Value: 2.2331407
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1038,7 +1088,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_LastSceneViewRotation: {x: -0.08203598, y: 0.7394095, z: -0.09164958, w: -0.6619801}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
