@@ -20,6 +20,8 @@ public class PlayerCar : MonoBehaviour
     public float carSpeed; // speed parallel to the car body (m/s)
     public float wheelRPM; // average wheel rpm
 
+    public float driftScale;
+
     private float steerAngle;
     private float wheelTorque;
     private float pedalBrakeForce;
@@ -44,13 +46,18 @@ public class PlayerCar : MonoBehaviour
         wheelRPM = (wColliderBR.rpm + wColliderBL.rpm + wColliderFR.rpm + wColliderFL.rpm) / 4;
 
         carSpeed = transform.InverseTransformDirection(carRigidbody.velocity).z;
+        float xSpeed = transform.InverseTransformDirection(carRigidbody.velocity).x;
 
         ConvertThrottle();
         steerAngle = carSteering.GetSteer(steerInput, carSpeed);
-        wheelTorque = carEngine.GetTorque(throttleInput, wheelRPM);
+        wheelTorque = carEngine.GetTorque(throttleInput, wheelRPM, 60 * carSpeed / (wColliderFR.radius * Mathf.PI));
         ApplySteering();
         ApplyTorque();
         ApplyBrake();
+
+        
+        driftScale = Mathf.Rad2Deg * Mathf.Asin(xSpeed / carRigidbody.velocity.magnitude);
+        
     }
     // --------------------------- user input ---------------------
     public void OnSteering(InputValue input)
@@ -76,6 +83,10 @@ public class PlayerCar : MonoBehaviour
     public void OnGearDown(InputValue input)
     {
         if (carEngine.gear > 1) carEngine.gear--;
+    }
+    public void OnRespawn()
+    {
+        transform.position = new Vector3(0, 11, 0);
     }
     // --------------------------- user input end -----------------
     private void ConvertThrottle()

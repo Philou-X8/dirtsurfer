@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CarEngine : MonoBehaviour
 {
+    private Rigidbody carRigidbody;
+
     public float maxForce;
     public float maxRPM;
     public const float idleRPM = 0;
@@ -18,30 +20,36 @@ public class CarEngine : MonoBehaviour
 
     void Start()
     {
+        carRigidbody = GetComponent<Rigidbody>();
         gear = 1;
         input = 0f;
         RPM = 0f;
         maxRPM = Mathf.Clamp(maxRPM, 1000, 10000);
         maxForce = Mathf.Clamp(maxForce, 10, 10000);
     }
+    private void FixedUpdate()
+    {
+        
+    }
 
-    public float GetTorque(float masterInput, float avgWheelRPM)
+    public float GetTorque(float masterInput, float avgWheelRPM, float convertedSpeed)
     {
         input = masterInput;
-        return GetTorque(avgWheelRPM);
+        return GetTorque(avgWheelRPM, convertedSpeed);
     }
-    public float GetTorque(float avgWheelRPM)
+    public float GetTorque(float avgWheelRPM, float convertedSpeed)
     {
         wheelRPM = Mathf.Clamp(avgWheelRPM, 0f, 2000f);
-        ShiftGear(); 
+        ShiftGear(convertedSpeed); 
         WheelToEngineRPM();
         EngineEfficiency();
         ApplyEfficiency();
         return outputForce;
     }
-    private void ShiftGear()
+    private void ShiftGear(float convertedSpeed)
     {
         gear = Mathf.Clamp(Mathf.CeilToInt(wheelRPM / 200), 1, 10);
+        //gear = Mathf.Clamp(Mathf.CeilToInt((wheelRPM+convertedSpeed)/2 / 200), 1, 10);
     }
     private void WheelToEngineRPM()
     {
